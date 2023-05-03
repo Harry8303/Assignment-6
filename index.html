@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>Number Guessing Game</title>
+  </head>
+  <body>
+    <h1 id="heading">Number Guessing Game</h1>
+    <p id="text">Enter a number between 1 and 100:</p>
+    <input id="userinput" type="number" min="1" max="100" />
+    <button onclick="startGame()">Start</button>
+    <p id="outcome"></p>
+
+    <script>
+      let answer;
+      let numGuesses = 0;
+
+      function startGame() {
+        let userInput = document.getElementById("userinput").value;
+        if (userInput < 1 || userInput > 100) {
+          document.getElementById("outcome").innerHTML =
+            "Invalid number. Please enter a number between 1 and 100.";
+          return;
+        }
+
+        answer = userInput;
+        numGuesses = 0;
+        computerGuess();
+      }
+
+      function computerGuess() {
+        numGuesses++;
+        let guess = Math.floor(Math.random() * 100) + 1;
+        if (guess == answer) 
+        {
+          document.getElementById("outcome").innerHTML =
+            "The computer guessed " +
+            guess +
+            " and won in " +
+            numGuesses +
+            " guesses.";
+        } 
+        else if (numGuesses < 5) 
+        {
+          document.getElementById("outcome").innerHTML =
+            "The computer guessed " + guess + ". Guess again.";
+          setTimeout(computerGuess, 1000);
+        } 
+        else
+         {
+          document.getElementById("outcome").innerHTML =
+            "The computer could not guess the number. VICTORY IS YOURS!! ";
+        }
+      }
+    </script>
+  </body>
+</html>
